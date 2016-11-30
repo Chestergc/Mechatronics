@@ -69,4 +69,5 @@ main()      //Main doesn't need to be an int
           delay_ms(1000);
           loop--;
         }
+        lights(100);
 }
