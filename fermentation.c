@@ -25,7 +25,7 @@ void cooling(){
   output_low(C2);
 }
 
-void lights(int x){
+int lights(int x){
   int loop = x;
   while (loop>=0){
     output_high(C4);
