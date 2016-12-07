@@ -56,19 +56,27 @@ main()      //Main doesn't need to be an int
         output_b(0x00);
         output_c(0x00);
         output_d(0x00);
-        int loop=1;
+        int lp=1;
 
-        while(loop>0) //Loop
+        while(lp>0) //Loop
         {
-          fillTank();
-          delay_ms(1000);
-          heater();
-          delay_ms(1000);
-          cooling();
-          delay_ms(1000);
-          emptyTank();
-          delay_ms(1000);
-          loop--;
+          if (!input(D2)) {
+            fillTank();
+            delay_ms(1000);
+          }
+          if (!input(D0)) {
+            heater();
+            delay_ms(1000);
+            cooling();
+            delay_ms(1000);
+          }
+          if (input(D3)) {
+            emptyTank();
+            delay_ms(1000);
+          }
+          else{
+            lights(10);
+          }
+          lp--;
         }
-        lights(100);
 }
