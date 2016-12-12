@@ -5,7 +5,7 @@
 
 void fillTank(){
   while(!input(D2)){
-    output_low(C0);
+    output_high(C0);
     delay_ms(100);
   }
   output_high(C0);
@@ -13,26 +13,26 @@ void fillTank(){
 
 void heater(){
   while(!input(D0)){
-    output_low(C3);
+    output_high(C3);
     delay_ms(100);
   }
-  output_high(C3);
+  output_low(C3);
 }
 
 void cooling(){
-  output_low(C2);
-  delay_ms(6000000);
   output_high(C2);
+  delay_ms(6000000);
+  output_low(C2);
 }
 
 int lights(int x){
   int loop;
   loop = x;
-  while (loop>=1){
-    output_low(C4);
+  while (loop>=0){
+    output_high(C4);
     output_high(BUZZER);
     delay_ms(500);
-    output_high(C4);
+    output_low(C4);
     output_low(BUZZER);
     delay_ms(500);
     loop--;
@@ -42,11 +42,11 @@ int lights(int x){
 void emptyTank() {
   if (input(D3)) {
     while (!input(D1)) {
-      output_low(C1);
+      output_high(C1);
       lights(4); //Alarms
     }
-    output_high(C1);
-    output_high(C4);
+    output_low(C1);
+    output_low(C4);
   }
 }
 
@@ -56,9 +56,8 @@ main()      //Main doesn't need to be an int
         output_b(0x00);
         output_c(0x00);
         output_d(0x00);
-        int lp=1;
 
-        while(lp>0) //Loop
+        while(1) //Loop
         {
           if (!input(D2)) {
             fillTank();
@@ -70,13 +69,13 @@ main()      //Main doesn't need to be an int
             cooling();
             delay_ms(1000);
           }
-          if (input(D3)) {
-            emptyTank();
+          while(!input(D4)){
             delay_ms(1000);
           }
           else{
+            emptyTank();
+            delay_ms(1000);
             lights(10);
           }
-          lp--;
         }
 }

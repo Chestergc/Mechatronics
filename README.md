@@ -17,3 +17,6 @@ The commands added by the library are:
 - D0=>D7 (inputs)
 - RELE1, RELE2 (Relay Interfaces)
 - BUZZER (exactly what it sounds like.)
+
+The code is done, the final version is in the fermentation.c file, this is the last update to this
+repository, it's going to be archived for future reference.
